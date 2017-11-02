@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @course.title %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= @course.university %>
+</p>
+
+<p>
+  <strong>Disciplinas:</strong>
+  <ul>
+  <% @course.units.each do |unit| %>
+    <li><%= link_to unit.title, unit_path(unit) %></li>
+  <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Editar', edit_course_path(@course) %> |
+<%= link_to 'Voltar', courses_path %>
