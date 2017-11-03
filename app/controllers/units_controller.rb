@@ -32,7 +32,7 @@ class UnitsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @unit.save
+      if @unit.update(unit_params)
         format.html { redirect_to @unit, notice: 'Unit was successfully updated.' }
         format.json { render :show, status: :created, location: @unit }
       else

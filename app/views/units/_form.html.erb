@@ -1,7 +1,9 @@
 <%= form_for(unit) do |f| %>
 
-<% unit.errors.full_messages.each do |message| %>
-  <p><%= message %></p>
+<% if unit.errors.any? %>
+  <% unit.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
 <% end %>
 
 <div class="field">
@@ -15,7 +17,7 @@
 </div>
 
 <div class="actions">
-  <%= f.submit %>
+  <%= f.submit "Enviar" %>
 </div>
 
 <% end %>
