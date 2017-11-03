@@ -1,0 +1,31 @@
+<%= form_for(review) do |f| %>
+
+<% if review.errors.any? %>
+  <ul>
+    <% @review.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="field">
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+</div>
+
+<div class="field">
+  <%= f.label :unit %>
+  <%= review.unit %>
+</div>
+
+<div class="field">
+  <%= f.label :rating %>
+  <%= f.select :rating, 1..5  %>
+</div>
+
+<div class="field">
+  <%= f.label :year %>
+  <%= f.select :year, (Time.zone.now.year - 5)..(Time.zone.now.year) %>
+</div>
+
+<% end %>
