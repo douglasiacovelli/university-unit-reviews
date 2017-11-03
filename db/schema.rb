@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102022351) do
+ActiveRecord::Schema.define(version: 20171103005927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20171102022351) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string  "content"
+    t.integer "unit_id"
+    t.integer "rating"
+    t.integer "year"
+    t.integer "semester"
+    t.index ["unit_id"], name: "index_reviews_on_unit_id", using: :btree
+  end
+
   create_table "units", force: :cascade do |t|
     t.string  "title"
     t.integer "course_id"
@@ -29,5 +38,6 @@ ActiveRecord::Schema.define(version: 20171102022351) do
     t.index ["course_id"], name: "index_units_on_course_id", using: :btree
   end
 
+  add_foreign_key "reviews", "units"
   add_foreign_key "units", "courses"
 end
