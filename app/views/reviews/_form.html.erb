@@ -9,23 +9,28 @@
 <% end %>
 
 <div class="field">
-  <%= f.label :content %>
+  <%= f.label :rating, 'Avaliação' %>
+  <%= f.select :rating, 1..5, prompt: 'Dê a sua avaliação' %>
+</div>
+
+<div class="field">
+  <%= f.label :content, 'Comentário' %>
   <%= f.text_area :content %>
 </div>
 
 <div class="field">
-  <%= f.label :unit %>
-  <%= review.unit %>
+  <%= f.label :unit, 'Disciplina' %>
+  <%= f.collection_select :unit, Unit.all, :id, :title_with_course, {selected: params[:unit]} %>
 </div>
 
 <div class="field">
-  <%= f.label :rating %>
-  <%= f.select :rating, 1..5  %>
+  <%= f.label :year, 'Ano' %>
+  <%= f.select :year, (Time.zone.now.year - 5)..(Time.zone.now.year), selected: Time.zone.now.year %>
 </div>
 
 <div class="field">
-  <%= f.label :year %>
-  <%= f.select :year, (Time.zone.now.year - 5)..(Time.zone.now.year) %>
+  <%= f.label :semester, 'Semestre' %>
+  <%= f.select :semester, 1..2 %>
 </div>
 
 <% end %>
