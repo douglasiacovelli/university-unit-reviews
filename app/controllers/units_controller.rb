@@ -1,6 +1,5 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
-  before_action :set_courses, only: [:new, :edit, :create, :update]
 
   def index
     @units = Unit.all
@@ -53,10 +52,6 @@ class UnitsController < ApplicationController
   private
     def set_unit
       @unit = Unit.find(params[:id])
-    end
-
-    def set_courses
-      @courses = Course.all
     end
 
     def unit_params
