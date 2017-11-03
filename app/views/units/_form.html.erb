@@ -16,6 +16,11 @@
   <%= f.collection_select :course_id, @courses, :id, :title %>
 </div>
 
+<div class="field">
+  <%= f.label :teachers_name %>
+  <%= f.text_field :teachers_name %>
+</div>
+
 <div class="actions">
   <%= f.submit "Enviar" %>
 </div>
