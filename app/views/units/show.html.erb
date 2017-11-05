@@ -1,4 +1,34 @@
 <h1><%= @unit.title %> | <%= @unit.teachers_name %></h1>
+<br/>
+<% if @unit.reviews.any? %>
+
+  <h2>Avaliações</h2>
+  <hr/>
+  <table>
+    <thead>
+      <th>Disciplina</th>
+      <th>Período</th>
+      <th>Relevância da disciplina</th>
+      <th>Aula do professor</th>
+      <th>Prova é justa?</th>
+      <th>Valeu a pena?</th>
+      <th>Dificuldade</th>
+    </thead>
+    <tbody>
+  <% @unit.reviews.each do |review| %>
+    <tr>
+      <td><%= review.unit.title %>
+      <td><%= review.period %>
+      <td><%= review.rating_relevance %>
+      <td><%= review.rating_teaching %>
+      <td><%= review.rating_exam %>
+      <td><%= review.rating_worth_it ? 'Sim' : 'Não' %>
+      <td><%= review.rating_difficulty %>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+<p />
 
 <%= link_to 'Avaliar Disciplina', new_review_path({ unit: @unit.id }) %>
 <%= link_to 'Editar', edit_unit_path(@unit) %>|
