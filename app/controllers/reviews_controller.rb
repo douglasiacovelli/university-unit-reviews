@@ -9,13 +9,19 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
+    if (params[:unit].blank?)
+      redirect_to units_url
+    else
+      @review = Review.new
+      @unit = Unit.find(params[:unit])
+    end
   end
 
   def edit
   end
 
   def create
+    @unit = Unit.find(review_params[:unit_id])
     @review = Review.create(review_params)
 
     if @review.save
@@ -44,7 +50,7 @@ class ReviewsController < ApplicationController
     end
 
     def review_params
-      params.require(:review).permit(:content, :unit, :rating, :year, :semester)
+      params.require(:review).permit(:content, :unit_id, :rating_relevance, :rating_difficulty, :rating_teaching, :rating_exam, :rating_worth_it, :year, :semester)
     end
 
 end

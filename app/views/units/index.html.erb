@@ -8,19 +8,20 @@
       <th>Nome</th>
       <th>Professor(a)</th>
       <th>Curso</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
-
+<% admin = false %>
   <tbody>
     <% @units.each do |unit| %>
       <tr>
         <td><%= unit.title %></td>
         <td><%= unit.teachers_name %></td>
         <td><%= unit.course.title %></td>
+        <td><%= link_to 'Avaliar', new_review_path({ unit: unit.id }) %></td>
         <td><%= link_to 'Ver', unit %></td>
-        <td><%= link_to 'Editar', edit_unit_path(unit) %></td>
-        <td><%= link_to 'Apagar', unit, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+        <td><%= link_to 'Editar', edit_unit_path(unit) if admin %></td>
+        <td><%= link_to 'Apagar', unit, method: :delete, data: { confirm: 'Tem certeza?' } if admin %></td>
       </tr>
     <% end %>
   </tbody>
