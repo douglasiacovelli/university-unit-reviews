@@ -1,4 +1,4 @@
-<%= form_for(review) do |f| %>
+<%= form_for(review, url: unit_reviews_path) do |f| %>
 
 <% if review.errors.any? %>
   <ul>
@@ -38,12 +38,12 @@
   <%= f.text_area :content %>
 </div>
 
-<%= f.hidden_field :unit_id, :value => params[:unit] %>
-
 <div class="field">
   <%= f.label :year, 'Ano' %>
   <%= f.select :year, (Time.zone.now.year - 5)..(Time.zone.now.year), selected: Time.zone.now.year %>
 </div>
+
+<%= f.hidden_field :unit_id, value: params[:unit_id] %>
 
 <div class="field">
   <%= f.label :semester, 'Semestre' %>

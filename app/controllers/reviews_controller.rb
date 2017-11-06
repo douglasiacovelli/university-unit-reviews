@@ -1,31 +1,26 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :find_unit, only: [:new, :create, :edit, :update]
 
   def index
-    @reviews = Review.all
+    @reviews = Review.where(:unit_id => params[:unit_id])
   end
 
   def show
   end
 
   def new
-    if (params[:unit].blank?)
-      redirect_to units_url
-    else
-      @review = Review.new
-      @unit = Unit.find(params[:unit])
-    end
+    @review = Review.new
   end
 
   def edit
   end
 
   def create
-    @unit = Unit.find(review_params[:unit_id])
-    @review = Review.create(review_params)
+    @review = Review.new(review_params)
 
     if @review.save
-      redirect_to @review, notice: 'Avaliação salva com sucesso.'
+      redirect_to unit_reviews_path(@unit), notice: 'Avaliação salva com sucesso.'
     else
       render :new
     end
@@ -45,6 +40,11 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+    def find_unit
+        @unit = Unit.find(params[:unit_id])
+    end
+
     def set_review
       @review = Review.find(params[:id])
     end
