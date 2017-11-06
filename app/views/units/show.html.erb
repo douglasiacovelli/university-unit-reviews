@@ -30,6 +30,6 @@
 <% end %>
 <p />
 
-<%= link_to 'Avaliar Disciplina', new_review_path({ unit: @unit.id }) %>
+<%= link_to 'Avaliar Disciplina', new_unit_review_path(@unit) %>
 <%= link_to 'Editar', edit_unit_path(@unit) %>|
 <%= link_to 'Voltar', units_path %>

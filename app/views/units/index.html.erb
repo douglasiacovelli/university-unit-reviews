@@ -18,7 +18,7 @@
         <td><%= unit.title %></td>
         <td><%= unit.teachers_name %></td>
         <td><%= unit.course.title %></td>
-        <td><%= link_to 'Avaliar', new_review_path({ unit: unit.id }) %></td>
+        <td><%= link_to 'Avaliar', new_unit_review_path(unit) %></td>
         <td><%= link_to 'Ver', unit %></td>
         <td><%= link_to 'Editar', edit_unit_path(unit) if admin %></td>
         <td><%= link_to 'Apagar', unit, method: :delete, data: { confirm: 'Tem certeza?' } if admin %></td>

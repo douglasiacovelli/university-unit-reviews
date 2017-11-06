@@ -1,0 +1,25 @@
+<h1>Avaliações</h1>
+<table>
+  <thead>
+    <th>Disciplina</th>
+    <th>Período</th>
+    <th>Relevância da disciplina</th>
+    <th>Aula do professor</th>
+    <th>Prova é justa?</th>
+    <th>Valeu a pena?</th>
+    <th>Dificuldade</th>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.unit.title %>
+      <td><%= review.period %>
+      <td><%= review.rating_relevance %>
+      <td><%= review.rating_teaching %>
+      <td><%= review.rating_exam %>
+      <td><%= review.rating_worth_it ? 'Sim' : 'Não' %>
+      <td><%= review.rating_difficulty %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
