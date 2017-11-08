@@ -1,5 +1,5 @@
 class UnitsController < ApplicationController
-  before_action :set_unit, only: [:show, :edit, :update, :destroy]
+  before_action :find_unit, only: [:show, :edit, :update, :destroy]
 
   def index
     @units = Unit.all
@@ -18,43 +18,33 @@ class UnitsController < ApplicationController
   def create
     @unit = Unit.new(unit_params)
 
-    respond_to do |format|
-      if @unit.save
-        format.html { redirect_to @unit, notice: 'Unit was successfully created.' }
-        format.json { render :show, status: :created, location: @unit }
-      else
-        format.html { render :new }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
-      end
+    if @unit.save
+      redirect_to @unit, notice: 'Unit was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @unit.update(unit_params)
-        format.html { redirect_to @unit, notice: 'Unit was successfully updated.' }
-        format.json { render :show, status: :created, location: @unit }
-      else
-        format.html { render :new }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
-      end
+    if @unit.update(unit_params)
+      redirect_to @unit, notice: 'Unit was successfully updated.'
+    else
+      render :new
     end
   end
 
   def destroy
     @unit.destroy
-    respond_to do |format|
-      format.html { redirect_to units_url, notice: 'Unit was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to units_path, notice: 'Unit was successfully destroyed.'
   end
 
   private
-    def set_unit
-      @unit = Unit.find(params[:id])
-    end
 
-    def unit_params
-      params.require(:unit).permit(:title, :course_id, :teachers_name)
-    end
+  def find_unit
+    @unit = Unit.find(params[:id])
+  end
+
+  def unit_params
+    params.require(:unit).permit(:title, :course_id, :teachers_name)
+  end
 end

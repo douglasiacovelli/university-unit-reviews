@@ -1,9 +1,9 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :find_review, only: [:show, :edit, :update, :destroy]
   before_action :find_unit, only: [:new, :create, :edit, :update]
 
   def index
-    @reviews = Review.where(:unit_id => params[:unit_id])
+    @reviews = Review.where(unit_id: params[:unit_id])
   end
 
   def show
@@ -36,21 +36,20 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    redirect_to courses_url, notice: 'Course was successfully destroyed.'
+    redirect_to courses_path, notice: 'Course was successfully destroyed.'
   end
 
   private
 
-    def find_unit
-        @unit = Unit.find(params[:unit_id])
-    end
+  def find_unit
+      @unit = Unit.find(params[:unit_id])
+  end
 
-    def set_review
-      @review = Review.find(params[:id])
-    end
+  def find_review
+    @review = Review.find(params[:id])
+  end
 
-    def review_params
-      params.require(:review).permit(:content, :unit_id, :rating_relevance, :rating_difficulty, :rating_teaching, :rating_exam, :rating_worth_it, :year, :semester)
-    end
-
+  def review_params
+    params.require(:review).permit(:content, :unit_id, :rating_relevance, :rating_difficulty, :rating_teaching, :rating_exam, :rating_worth_it, :year, :semester)
+  end
 end
